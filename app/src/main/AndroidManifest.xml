@@ -3,8 +3,7 @@
     package="com.zebra.oeminfo_sample">
 
     <uses-permission android:name="com.zebra.provider.READ"/>
-    <uses-permission android:name="com.symbol.emdk.permission.EMDK"/>
-    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
+
     <!--  Required for Content provider restrictions introduced in Android 11 -->
     <queries>
         <package android:name="com.zebra.zebracontentprovider" />
