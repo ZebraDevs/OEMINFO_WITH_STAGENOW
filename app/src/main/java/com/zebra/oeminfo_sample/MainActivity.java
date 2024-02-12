@@ -10,6 +10,11 @@ import android.util.Log;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+/*
+BACKWARD PORTABILITY NOTES
+
+- ON BSP 01.23.18, NO PATCHES, A8 => Error: content://oem_info/oem.zebra.secure/build_serial returns the package signature
+*/
 
 public class MainActivity extends AppCompatActivity{
 
@@ -27,9 +32,14 @@ public class MainActivity extends AppCompatActivity{
 
         String resultString = "";
 
-        RetrieveOEMInfo(Uri.parse(URI_SERIAL), (TextView) findViewById(R.id.txtSerialNumber), false);       //  Build.getSerial()
-        RetrieveOEMInfo(Uri.parse(URI_IMEI), (TextView) findViewById(R.id.txtImei), true);              //  TelephonyManager getImei()
-        RetrieveOEMInfo(Uri.parse(URI_WIFI_MAC), (TextView) findViewById(R.id.txtWifiMac), false);
+        if(Build.VERSION.SDK_INT<29){
+            ((TextView) findViewById(R.id.txtSerialNumber)).setText( Build.getSerial() );  //REMINDER: MANUALLY GRANT THE PHONE STATE PERMISSION!
+        }
+        else {
+            RetrieveOEMInfo(Uri.parse(URI_SERIAL), (TextView) findViewById(R.id.txtSerialNumber), false);       //  Build.getSerial()
+            RetrieveOEMInfo(Uri.parse(URI_IMEI), (TextView) findViewById(R.id.txtImei), true);              //  TelephonyManager getImei()
+            RetrieveOEMInfo(Uri.parse(URI_WIFI_MAC), (TextView) findViewById(R.id.txtWifiMac), false);
+        }
 
         //  Note: Build ID and Fingerprint do not need special permission granted by Access Manager (these are standard Android IDs)
         TextView textViewID =  findViewById(R.id.txtBuildId);
