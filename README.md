@@ -1,4 +1,4 @@
-*Please be aware that this application / sample is provided as-is for demonstration purposes without any guarantee of support*
+Please be aware that this application / sample is provided as-is for demonstration purposes without any guarantee of support
 =========================================================
 
 # OEM_INFO_EXERCISER (from the original code of EMDK-DeviceIdentifiers-Sample)
@@ -31,7 +31,9 @@ Then use the [MX access manager](https://techdocs.zebra.com/mx/accessmgr/) to al
 The MX access manager settings to enable this are as follows:
 - Service Access Action: "AllowCaller" (or 'Allow Caller to Call Service')
 - Service Identifier: For the serial number use content://oem_info/oem.zebra.secure/build_serial.  For the IMEI use content://oem_info/wan/imei.  If you want to allow your app access to both, you will need to declare two different instances of the AccessManager.
-- Caller Package Name: Your package name, in the case of this sample it is com.zebra.emdk_deviceidentifiers_sample.
+- Caller Package Name: Your *```applicationID```*, as it appears in the module's build.gradle file. e.g.
+    ![image](https://github.com/ZebraDevs/OEMINFO_WITH_STAGENOW/assets/11386676/e47a5323-c8e8-45d6-803d-440a5ad96d7e)
+
 - Caller Signature: The signing certificate of your application.  For more information on generating this see https://github.com/darryncampbell/MX-SignatureAuthentication-Demo.
 
 You can apply the MX access manager settings in one of three ways:
